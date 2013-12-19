@@ -9,15 +9,17 @@
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>				
 										
 	<!-- Controller Specific JS/CSS -->
-	<link rel="stylesheet" href="/css/sample-app.css" type="text/css">
+	<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+	<link rel="stylesheet" href="/css/journal-theme.css" type="text/css">
+	<link rel="stylesheet" href="/css/style.css" type="text/css">
 	<?php if(isset($client_files_head)) echo $client_files_head; ?>
 		
 </head>
 
 <body>	
 
-	<nav>
-		<menu>
+	<div id='navbar-main' class='navbar navbar-inverse'>
+		<ul class='nav navbar-nav'>
 				<li><a href='/'>Home</a></li>
 				
 			<?php if($user): ?>
@@ -29,17 +31,20 @@
 				<li><a href='/users/signup'>Sign Up</a></li>
 				<li><a href='/users/login'>Log In</a></li>
 			<?php endif; ?>
-		</menu>
-	</nav>
-	
-	<?php if($user): ?>
-		You are logged in as <?=$user->first_name?> <?=$user->last_name?><br>
-	<?php endif; ?>
-	
-	<br><br>
-	
-	<?php if(isset($content)) echo $content; ?>
+		<ul>
+	</div>
 
-	<?php if(isset($client_files_body)) echo $client_files_body; ?>
+	<div class='container'>
+	
+		<?php if($user): ?>
+			You are logged in as <?=$user->first_name?> <?=$user->last_name?><br>
+		<?php endif; ?>
+		
+		<br><br>
+		
+		<?php if(isset($content)) echo $content; ?>
+
+		<?php if(isset($client_files_body)) echo $client_files_body; ?>
+    </div>
 </body>
 </html>

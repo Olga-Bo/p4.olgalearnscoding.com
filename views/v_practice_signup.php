@@ -14,7 +14,8 @@
 	Password 
 	<input type='password' name='password'><br>
 	
-	<input type='submit' value='Sign Up'>
+	<!--<input type='submit' value='Sign Up'>-->
+	<button type='Submit' class="btn btn-default">Sign up</button>
 
 	<?php if(isset($error)) echo $error; ?>	
 

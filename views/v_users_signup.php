@@ -1,13 +1,25 @@
-<h2>Sign Up</h2>
 
-<form method='POST' action='/users/p_signup'>
+<div class='well'>
+	<form class="bs-example form-horizontal" id="signupForm" method='POST' action='/users/p_signup' role='form'>
+		<fieldset>
+			<legend>Sign Up</legend>
+			<div>
+				<label for="first_name">Firstname</label>
+				<input id="first_name" name="first_name" type="text" class='form-control'/>
+			</div>
+			<div>
+				<label for="last_name">Lastname</label>
+				<input id="last_name" name="last_name" type="text" class='form-control'/>
+			</div>
+			<div>
+				<label for="password">Password</label>
+				<input id="password" name="password" type="password" class='form-control'/>
+			</div>
 
-	First Name <input type='text' name='first_name'><br>
-	Last Name <input type='text' name='last_name'><br>
-	Email <input type='text' name='email'><br>
-	Password <input type='password' name='password'><br>
-	
-	<input type='submit' value='Sign Up'>
-	
+		</fieldset></br>
+		
+		<button type='Submit' class="btn btn-primary">Sign up</button>
 
-</form>
+	</form>
+
+</div>
