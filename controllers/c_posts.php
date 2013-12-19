@@ -45,7 +45,7 @@ class posts_controller extends base_controller {
 		$_POST['user_id']  = $this->user->user_id;
 		$_POST['created']  = Time::now();
 		$_POST['modified'] = Time::now();
-		
+
 		DB::instance(DB_NAME)->insert('posts',$_POST);
 		
 		$view = new View('v_posts_p_add');

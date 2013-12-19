@@ -14,6 +14,17 @@ li {
 
 }
 
+/*----------------FORMS--------------------*/
+
+
 fieldset {
 	width:450px;
 }
+
+form {
+	margin-left: 30px;
+}
+textarea {
+	height: 500px;
+}
+
