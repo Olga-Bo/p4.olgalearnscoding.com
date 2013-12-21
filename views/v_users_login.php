@@ -1,4 +1,20 @@
+<?php if(isset($_GET['user-exists'])): ?>
+<div class="alert alert-danger fade in">
+        <i class="icon-warning-sign">Someone already uses this email address. Please login or <a href="/users/signup">SIGN UP</a> with differen email. 
+</div>
+<?php endif; ?>
 
+<?php if(isset($_GET['success'])): ?>
+<div class="alert alert-success fade in">
+        <i class="icon-warning-sign">Your registration was successful. Please login.
+</div>
+<?php endif; ?>
+
+<?php if(isset($_GET['fail'])): ?>
+<div class="alert alert-danger fade in">
+        <i class="icon-warning-sign">Login failed. Email or password are incorrect.
+</div>
+<?php endif; ?>
 
 <div class="well">
 			

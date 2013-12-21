@@ -6,8 +6,8 @@
 		</div>
 		
 		<h3 id='class-name'><?=nl2br($post['class_name'])?></h3>
-		<label>Description</label><br><?=nl2br($post['content'])?><br>
 		<label>Location</label><br><?=nl2br($post['location'])?><br>
+		<label>Description</label><br><?=nl2br($post['content'])?><br>
 		<label>Teacher</label><br><?=$post['first_name']?><br>
 		
 		</div>

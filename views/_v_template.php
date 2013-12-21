@@ -26,6 +26,7 @@
 			<?php if($user): ?>
 				<li><a href='/posts/add'>Add Class</a></li>
 				<li><a href='/posts/'>Browse Classes</a></li>
+				<li><a href='/users/myposts'>My classes</a></li>
 				<li><a href='/posts/users'>Follow Users</a></li>
 				<li><a href='/users/logout'>Logout</a></li>
 			<?php else: ?>

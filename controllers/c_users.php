@@ -29,13 +29,33 @@ class users_controller extends base_controller {
     Process the sign up form
     -------------------------------------------------------------------------------------------------*/
     public function p_signup() {
-	    	    
+	    	
+    	#Sanitize _POST
+        $_POST = DB::instance(DB_NAME)->sanitize($_POST);
+
 	    # Mark the time
 	    $_POST['created']  = Time::now();
 	    
+        #Check to make sure all form values are filled in.
+	     foreach($_POST as $key => $value){ 
+	          if((!isSet($value)) || (!$value) || ($value = "")) { 
+	                Router::redirect('/users/signup/?partial-registration');
+	         } 
+	     }  
+
+	    #Query DB for email 
+	    $q = "SELECT * FROM users WHERE email = '".$_POST['email']."'";
+
+	    $exsitingUsers = DB::instance(DB_NAME)->select_rows($q);
+
+	    if(!empty($exsitingUsers)){
+
+	    	Router::redirect('/users/login/?user-exists');
+	    }
+	    else {
 	    # Hash password
 	    $_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
-	    
+
 	    # Create a hashed token
 	    $_POST['token']    = sha1(TOKEN_SALT.$_POST['email'].Utils::generate_random_string());
 	    
@@ -43,8 +63,10 @@ class users_controller extends base_controller {
 	    DB::instance(DB_NAME)->insert_row('users', $_POST);
 	    
 	    # Send them to the login page
-	    Router::redirect('/users/login');
-	    
+	    Router::redirect('/users/login/?success');
+
+	    }
+
     }
 
 
@@ -88,7 +110,8 @@ class users_controller extends base_controller {
 		}
 		# Fail
 		else {
-			echo "Login failed! <a href='/users/login'>Try again?</a>";
+			//echo "Login failed! <a href='/users/login'>Try again?</a>";
+			Router::redirect('/users/login/?fail');
 		}
 	   
     }
@@ -145,6 +168,7 @@ class users_controller extends base_controller {
 		if(!$this->user) {
 			die('Members only. <a href="/users/login">Login</a>');
 		}
+		
 		# Set up view
 		$this->template->content = View::instance('v_users_posts');
 
