@@ -139,6 +139,30 @@ class users_controller extends base_controller {
 				
     }
 
+
+	public function myposts() {
+
+		if(!$this->user) {
+			die('Members only. <a href="/users/login">Login</a>');
+		}
+		# Set up view
+		$this->template->content = View::instance('v_users_posts');
+
+		$q = 'SELECT *
+				FROM posts
+				WHERE user_id = '.$this->user->user_id;
+
+		# Run query	
+		$posts = DB::instance(DB_NAME)->select_rows($q);
+		
+		# Pass $posts array to the view
+		$this->template->content->posts = $posts;
+		
+		# Render view
+		echo $this->template;
+	}
+	
+
 } # end of the class
 
 
