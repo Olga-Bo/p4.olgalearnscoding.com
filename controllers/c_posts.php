@@ -56,8 +56,40 @@ class posts_controller extends base_controller {
 						
 				
 	}
+
+	/*-------------------------------------------------------------------------------------------------
+	Add thunbnail
+	-------------------------------------------------------------------------------------------------*/
+
+	 public function thumb_update() {
+        # if user specified a new image file, upload it
+        if ($_FILES['avatar']['error'] == 0)
+        {
+            # upload an image
+            $image = Upload::upload($_FILES, "/uploads/", array("JPG", "JPEG", "jpg", "jpeg", "gif", "GIF", "png", "PNG"), $this->user->post_id);
+
+            if($image == 'Invalid file type.') {
+                # return an error
+                Router::redirect("/users/posts/add/error"); 
+            }
+            else {
+                # process the upload
+                $data = Array("image" => $image);
+                DB::instance(DB_NAME)->update("posts", $data, "WHERE post_id = ".$this->post_id);
+
+            }
+        }
+        else
+        {
+            # return an error
+             Router::redirect("/users/posts/add/error");  
+        }
+
+        # Redirect back to the profile page
+        router::redirect('/users/add/posts'); 
+    } 
 	
-	
+
 	/*-------------------------------------------------------------------------------------------------
 	View all posts
 	-------------------------------------------------------------------------------------------------*/
@@ -65,10 +97,7 @@ class posts_controller extends base_controller {
 		
 		# Set up view
 		$this->template->content = View::instance('v_posts_index');
-		
-		
-		/*$q = 'SELECT *
-				FROM posts';*/
+
 
 		$q = 'SELECT *
 				FROM posts
@@ -100,6 +129,50 @@ class posts_controller extends base_controller {
 		
 	}
 	
+	/*-------------------------------------------------------------------------------------------------
+	Delete post
+	-------------------------------------------------------------------------------------------------*/
+	public function delete($post_id) {
+        	
+
+        	$client_files_body = Array(
+			'/js/delete_post.js'
+		);
+            # Set up the where condition
+            $where_condition = 'WHERE post_id = '.$post_id;
+            
+            # Run the delete
+            DB::instance(DB_NAME)->delete('posts', $where_condition);
+
+                
+            Router::redirect('/users/myposts');
+        
+
+                
+        }
+
+	/*public function delete($post_created, $post_user_id) {
+        $q= 'SELECT
+        posts.content,
+		posts.created,
+		posts.user_id AS post_user_id,
+		users.first_name,
+		users.last_name
+        FROM posts
+        WHERE created = '.$post_created.' AND user_id ='.$post_user_id;
+
+        $post = DB::instance(DB_NAME)->select_row($q);
+
+
+
+        $post_id = $post['post_id'];
+
+
+        DB::instance(DB_NAME)->delete('posts','WHERE post_id ='.$post_id);
+
+
+        Router::redirect('/posts/index');
+        }   */  
 	
 	/*-------------------------------------------------------------------------------------------------
 	

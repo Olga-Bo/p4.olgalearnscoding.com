@@ -1,5 +1,7 @@
 <div class='well'>
 	<span id='input-error'></span>
+
+
 <form id="commentForm" class="cmxform bs-example form-horizontal" method='post'>
 	<fieldset>
 		<legend>Create class</legend>
@@ -28,3 +30,23 @@
 </div>
 
 <div id='results'></div>
+
+
+ <!--<form role="form" method='POST' enctype="multipart/form-data" action='/posts/thumb_update/'>
+
+
+           <img id="avatar" src="/uploads/avatars/<?= $post->avatar?>">
+            <img id="avatar" src='/uploads/<?=$post['avatar']?>'>               
+            <div>
+                    <label for="avata">Do you want to make some change?</label> 
+                    <input type="file" name="avatar" id="avatar"> 
+                    <?php if(isset($error)): ?>                   
+                            <div class="messge error">Upload failed.<br> 
+                            Image file must be a jpg, gif, or png.
+                            </div>                
+                    <?php endif; ?>
+                    <button type="submit" id='update-image' class="btn btn-success">Update Image</button>
+            </div>-->
+
+</form>
+

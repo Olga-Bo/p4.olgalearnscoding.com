@@ -4,11 +4,7 @@
 </div>
 <?php endif; ?>
 
-<?php if(isset($_GET['user-exists'])): ?>
-<div class="alert alert-danger fade in">
-        <strong><i class="icon-warning-sign"></i>We are unable to process your registration!</strong>This email already exists 
-</div>
-<?php endif; ?>
+
 
 
 

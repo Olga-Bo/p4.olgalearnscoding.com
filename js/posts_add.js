@@ -150,8 +150,9 @@ var foo = (function(){
     }
     else {
 		$("#input-error").html("<div class='alert alert-success'>New class was added</div>");
-	    $("#input-error").append('<a href="/posts/index">Browse all classes</a></br><a href="/posts/add">Create class</a>');
-	    $("#input-error").append('<a href="/users/posts">View your classes</a></br><a href="/posts/add">Create class</a>');
+	    $("#input-error").append('<a href="/posts/index">Browse all classes</a></br>');
+	    $("#input-error").append('<a href="/users/posts">View your classes</a></br>');
+	      $("#input-error").append('<a href="/posts/add">Create class</a>');
 	    $('form').hide();
 
 	} 
