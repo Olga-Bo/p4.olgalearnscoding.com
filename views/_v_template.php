@@ -14,6 +14,7 @@
 	<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
 	<link rel="stylesheet" href="/css/journal-theme.css" type="text/css">
 	<link rel="stylesheet" href="/css/style.css" type="text/css">
+	<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
 	<?php if(isset($client_files_head)) echo $client_files_head; ?>
 		
 </head>

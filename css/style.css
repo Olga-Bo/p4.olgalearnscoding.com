@@ -1,11 +1,14 @@
+
+
 menu {
 	margin:0;
 	padding:0;
+
 }
 
 li {
 
-
+	font-family: 'Lobster';
 	display:inline;
 }
 
@@ -32,6 +35,11 @@ textarea {
 	height: 500px;
 }
 
+.btn-block {
+	width:500px;
+	margin:auto;
+	color: white;
+}
 
 /*------------course box-------------------*/
 
