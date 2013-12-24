@@ -28,9 +28,9 @@
 			<?php if($user): ?>
 				<li><a href='/users/profile'>Home</a></li>
 				<li><a href='/posts/add'>Add Class</a></li>
-				<li><a href='/posts/'>Browse Classes</a></li>
+				<li><a href='/posts/users'>Browse Classes</a></li>
 				<li><a href='/users/myposts'>My classes</a></li>
-				<li><a href='/posts/users'>Follow Users</a></li>
+				<li><a href='/posts/myclass'>I am attending</a></li>
 				<li><a href='/users/logout'>Logout</a></li>
 			<?php else: ?>
 				<li><a href='/'>Home</a></li>

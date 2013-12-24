@@ -29,17 +29,32 @@ fieldset {
 }
 
 form {
-	margin-left: 30px;
+	position: relative;
+	margin:auto;
+
 }
 textarea {
 	height: 500px;
 }
 
+.landingpg {
+	margin-bottom: 30px;
+}
+
+.landingpg h3{
+	font-family: 'Lobster';
+}
+
+.landingpg h2 {
+	color: white;
+	font-family: 'Lobster';
+}
 .btn-block {
 	width:500px;
 	margin:auto;
 	color: white;
 }
+
 
 /*------------course box-------------------*/
 

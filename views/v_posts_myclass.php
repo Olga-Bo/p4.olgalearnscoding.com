@@ -9,13 +9,10 @@
 		<label>Location</label><br><?=nl2br($post['location'])?><br>
 		<label>Description</label><br><?=nl2br($post['content'])?><br>
 		<label>Teacher</label><br><?=$post['first_name']?><br>
-
+		
 		</div>
 		
 	<?php endforeach; ?>
 
-
-
 </div>
 	
-

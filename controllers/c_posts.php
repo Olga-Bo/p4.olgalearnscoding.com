@@ -128,6 +128,44 @@ class posts_controller extends base_controller {
 		echo $this->template;
 		
 	}
+
+	public function myclass() {
+		
+		# Set up view
+		$this->template->content = View::instance('v_posts_myclass');
+
+
+		/*$q = 'SELECT *
+				FROM posts
+				INNER JOIN users 
+				    ON posts.user_id = users.user_id';*/
+		# Set up query
+		$q = 'SELECT 
+		posts.class_name, 
+		posts.content, posts.created, 
+		posts.location, 
+		posts.post_id AS post_post_id, 
+		users_posts.user_id ASfollower_id, 
+		users.first_name, users.last_name
+		FROM posts
+		INNER JOIN users_posts ON posts.post_id = users_posts.post_id_followed
+		INNER JOIN users ON posts.user_id = users.user_id
+		WHERE users_posts.user_id ='.$this->user->user_id;
+
+		
+		# Run query	
+		$posts = DB::instance(DB_NAME)->select_rows($q);
+		
+		# Pass $posts array to the view
+		$this->template->content->posts = $posts;
+		
+		# Render view
+		echo $this->template;
+		
+	}
+
+
+
 	
 	/*-------------------------------------------------------------------------------------------------
 	Delete post
@@ -150,29 +188,6 @@ class posts_controller extends base_controller {
 
                 
         }
-
-	/*public function delete($post_created, $post_user_id) {
-        $q= 'SELECT
-        posts.content,
-		posts.created,
-		posts.user_id AS post_user_id,
-		users.first_name,
-		users.last_name
-        FROM posts
-        WHERE created = '.$post_created.' AND user_id ='.$post_user_id;
-
-        $post = DB::instance(DB_NAME)->select_row($q);
-
-
-
-        $post_id = $post['post_id'];
-
-
-        DB::instance(DB_NAME)->delete('posts','WHERE post_id ='.$post_id);
-
-
-        Router::redirect('/posts/index');
-        }   */  
 	
 	/*-------------------------------------------------------------------------------------------------
 	
@@ -182,23 +197,25 @@ class posts_controller extends base_controller {
 		# Set up view
 		$this->template->content = View::instance("v_posts_users");
 		
-		# Set up query to get all users
+		# Set up query to get all posts
 		$q = 'SELECT *
-			FROM users';
+			FROM posts
+			INNER JOIN users 
+				    ON posts.user_id = users.user_id';
 			
 		# Run query
-		$users = DB::instance(DB_NAME)->select_rows($q);
+		$posts = DB::instance(DB_NAME)->select_rows($q);
 		
-		# Set up query to get all connections from users_users table
+		# Set up query to get all connections from users_posts table
 		$q = 'SELECT *
-			FROM users_users
+			FROM users_posts
 			WHERE user_id = '.$this->user->user_id;
 			
 		# Run query
-		$connections = DB::instance(DB_NAME)->select_array($q,'user_id_followed');
+		$connections = DB::instance(DB_NAME)->select_array($q,'post_id_followed');
 		
 		# Pass data to the view
-		$this->template->content->users       = $users;
+		$this->template->content->posts       = $posts;
 		$this->template->content->connections = $connections;
 		
 		# Render view
@@ -211,17 +228,17 @@ class posts_controller extends base_controller {
 	/*-------------------------------------------------------------------------------------------------
 	Creates a row in the users_users table representing that one user is following another
 	-------------------------------------------------------------------------------------------------*/
-	public function follow($user_id_followed) {
+	public function follow($post_id_followed) {
 	
 	    # Prepare the data array to be inserted
 	    $data = Array(
 	        "created"          => Time::now(),
 	        "user_id"          => $this->user->user_id,
-	        "user_id_followed" => $user_id_followed
+	        "post_id_followed" => $post_id_followed
 	        );
 	
 	    # Do the insert
-	    DB::instance(DB_NAME)->insert('users_users', $data);
+	    DB::instance(DB_NAME)->insert('users_posts', $data);
 	
 	    # Send them back
 	    Router::redirect("/posts/users");
@@ -232,13 +249,13 @@ class posts_controller extends base_controller {
 	/*-------------------------------------------------------------------------------------------------
 	Removes the specified row in the users_users table, removing the follow between two users
 	-------------------------------------------------------------------------------------------------*/
-	public function unfollow($user_id_followed) {
+	public function unfollow($post_id_followed) {
 	
 	    # Set up the where condition
-	    $where_condition = 'WHERE user_id = '.$this->user->user_id.' AND user_id_followed = '.$user_id_followed;
+	    $where_condition = 'WHERE user_id = '.$this->user->user_id.' AND post_id_followed = '.$post_id_followed;
 	    
 	    # Run the delete
-	    DB::instance(DB_NAME)->delete('users_users', $where_condition);
+	    DB::instance(DB_NAME)->delete('users_posts', $where_condition);
 	
 	    # Send them back
 	    Router::redirect("/posts/users");
