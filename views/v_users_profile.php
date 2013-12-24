@@ -1,12 +1,12 @@
  <form role="form" method='POST' enctype="multipart/form-data" action='/users/profile_update/'>
-				<!--<?php if($image): ?>
+				<?php if($image): ?>
                     <img id="avatar" src="/uploads/avatars/<?= $user->image ?>" alt="<?=$user->first_name . ' ' . $user->last_name ?>">
             <?php else: ?>
-                    <img id="avatar" src="/uploads/avatars/default_user.png">
-            <?php endif; ?>-->
+                    <img id="avatar" src="/uploads/avatars/user.png">
+            <?php endif; ?>
 
 
-            <img id="avatar" src="/uploads/avatars/<?= $user->image ?>" alt="<?=$user->first_name . ' ' . $user->last_name ?>">                
+            <!--<img id="avatar" src="/uploads/avatars/<?= $user->image ?>" alt="<?=$user->first_name . ' ' . $user->last_name ?>">-->                
             <div>
                    
                     <input type="file" name="avata" id="avata"> 

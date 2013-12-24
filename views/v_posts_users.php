@@ -12,9 +12,9 @@
 
 
 		<?php if(isset($connections[$post['post_id']])): ?>
-		<a href='/posts/unfollow/<?=$post['post_id']?>'>Unfollow</a>
+		<a href='/posts/unfollow/<?=$post['post_id']?>'>Leave class</a>
 	<?php else: ?>
-		<a href='/posts/follow/<?=$post['post_id']?>'>Follow</a>
+		<a href='/posts/follow/<?=$post['post_id']?>'>Attend</a>
 	<?php endif; ?>	
 		
 		</div>
@@ -22,18 +22,3 @@
 	<?php endforeach; ?>
 
 </div>
-	
-<!--<?php foreach($posts as $post): ?>
-
-	<?=$user['first_name']?> <?=$user['last_name']?><br>
-	<?$post['class_name']?>
-	
-	<?php if(isset($connections[$post['post_id']])): ?>
-		<a href='/posts/unfollow/<?=$user['post_id']?>'>Unfollow</a>
-	<?php else: ?>
-		<a href='/posts/follow/<?=$post['post_id']?>'>Follow</a>
-	<?php endif; ?>	
-	
-	<br><br>
-
-<?php endforeach ?>-->
